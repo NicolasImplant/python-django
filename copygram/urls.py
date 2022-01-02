@@ -19,14 +19,9 @@ Including another URLconf
 
 
 from django.urls import path
-# Importamos la clase HttpResponse para generar la respuesta del primer "Hola-Mundo"
-from django.http import HttpResponse
-
-# Función para imprimir en pantalla una respuesta HTTP personalizada
-def hello_world(request):
-    """Return a greeting"""
-    return HttpResponse('¡ Hello world from Django and python !')
+from copygram import views
 
 urlpatterns = [
-    path('hello_world/', hello_world),
+    path('hello_world/', views.hello_world),
+    path('hi/', views.hi )
 ]
