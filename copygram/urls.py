@@ -23,5 +23,6 @@ from copygram import views
 
 urlpatterns = [
     path('hello_world/', views.hello_world),
-    path('hi/', views.hi )
+    path('sorted/', views.sorted_integers),
+    path('hi/<str:name>/<int:age>/', views.say_hi)
 ]
