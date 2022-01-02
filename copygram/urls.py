@@ -19,10 +19,12 @@ Including another URLconf
 
 
 from django.urls import path
-from copygram import views
+from copygram import views as local_views
+from posts import views as posts_views
 
 urlpatterns = [
-    path('hello_world/', views.hello_world),
-    path('sorted/', views.sorted_integers),
-    path('hi/<str:name>/<int:age>/', views.say_hi)
+    path('hello_world/', local_views.hello_world),
+    path('sorted/', local_views.sorted_integers),
+    path('hi/<str:name>/<int:age>/', local_views.say_hi),
+    path('posts/', posts_views.list_posts)
 ]
