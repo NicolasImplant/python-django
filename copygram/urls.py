@@ -17,12 +17,13 @@ Including another URLconf
 
 """ Copygram Url's modeule."""
 
-
+from django.contrib import admin
 from django.urls import path
 from copygram import views as local_views
 from posts import views as posts_views
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('hello_world/', local_views.hello_world),
     path('sorted/', local_views.sorted_integers),
     path('hi/<str:name>/<int:age>/', local_views.say_hi),
