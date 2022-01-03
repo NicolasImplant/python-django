@@ -16,6 +16,9 @@ class User(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
 
+    # validar si el usuario tiene permiso de administrador
+    is_admin = models.BooleanField(default=False)
+
     # El usuario es libre sobre si rellena el bio o no. 
     bio = models.TextField(blank=True)
 
@@ -27,4 +30,14 @@ class User(models.Model):
 
     # Va a guardar la fecha en la que se editó por ultima vez
     modified_at = models.DateTimeField(auto_now=True)
+
+    # Ubicación de los usuarios
+
+    country = models.CharField(max_length=50, null=True)
+    city = models.CharField(max_length=50, null=True)
+
+    def __str__(self):
+        """Returns user email"""
+        return self.email
+
 
