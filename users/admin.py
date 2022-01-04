@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 # Importamos la clase profile
 from users.models import Profile
+from posts.models import Post
 
 # Register your models here.
 
@@ -37,6 +38,18 @@ class ProfileAdmin(admin.ModelAdmin):
     )
     # Se debe añadir la variable 'readonly_fields' ya que estos campos no se pueden ni deben editar desde el perfil de admin
     readonly_fields = ('created', 'modified',)
+
+
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    """Post Admin profile view"""
+
+    list_display = ('pk', 'user', 'photo')
+    list_display_links = ('pk', 'user')
+    list_filter = ('created', 'modified')
+    readonly_fields = ('created', 'modified')
+
+
 
 class ProfileInline(admin.StackedInline):
     """Profile in-line admin for users."""
