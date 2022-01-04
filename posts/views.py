@@ -1,4 +1,5 @@
-from django.http import HttpResponse
+# from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from datetime import datetime
 
@@ -45,6 +46,7 @@ posts = [
 #         """.format(**post))
 #     return HttpResponse('<br>'.join(content))
 
+@login_required
 def list_posts(request):
     """Return a list with existing posts"""
     return render(request, 'posts/feed.html', {'posts' : posts})
