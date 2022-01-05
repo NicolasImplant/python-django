@@ -34,4 +34,5 @@ urlpatterns = [
     path('posts/', posts_views.list_posts, name='Feed'),
     path('users/login', user_views.login_view, name='Login' ),
     path('users/logout', user_views.logout_view, name='Logout' ),
+    path('users/signup', user_views.signup, name='Signup' ),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
