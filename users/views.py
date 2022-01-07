@@ -9,6 +9,11 @@ from users.models import Profile
 
 # Create your views here.
 
+@login_required
+def update_profile(request):
+    """Update a user profile view"""
+    return render(request, 'users/update_profile.html')
+
 def login_view(request):
     """Login View"""
     if request.method == 'POST':
@@ -59,4 +64,7 @@ def logout_view(request):
     """Logout view"""
     logout(request)
     return redirect('Login')
+
+
+
 
