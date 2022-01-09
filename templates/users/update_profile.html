@@ -70,10 +70,10 @@
                 </div>
 
                 {# Phone number field #}
-                <div class="form-group {% if form.phone_number.errors %} is-invalid {% endif %}">
+                <div class="form-group">
                     <label>Phone number</label>
                     <input
-                        class="form-control"
+                        class="form-control {% if form.phone_number.errors %} is-invalid {% endif %}"
                         type="text"
                         name="phone_number"
                         placeholder="Phone number"

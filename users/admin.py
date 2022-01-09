@@ -44,7 +44,7 @@ class ProfileAdmin(admin.ModelAdmin):
 class PostAdmin(admin.ModelAdmin):
     """Post Admin profile view"""
 
-    list_display = ('pk', 'user', 'photo')
+    list_display = ('pk', 'user', 'title', 'photo')
     list_display_links = ('pk', 'user')
     list_filter = ('created', 'modified')
     readonly_fields = ('created', 'modified')
