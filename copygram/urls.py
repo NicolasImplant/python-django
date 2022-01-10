@@ -18,23 +18,18 @@ Including another URLconf
 """ Copygram Url's modeule."""
 
 from django.contrib import admin
-from django.urls import path
-from copygram import settings, views as local_views
-from posts import views as posts_views
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from users import views as user_views
 
 
 urlpatterns = [
+    
     path('admin/', admin.site.urls),
-    path('hello_world/', local_views.hello_world, name='Hello_World'),
-    path('sorted/', local_views.sorted_integers, name='Sort'),
-    path('hi/<str:name>/<int:age>/', local_views.say_hi, name='Hi'),
-    path('', posts_views.list_posts, name='Feed'),
-    path('posts/new', posts_views.create_post, name='New_Post'),
-    path('users/login', user_views.login_view, name='Login' ),
-    path('users/logout', user_views.logout_view, name='Logout' ),
-    path('users/signup', user_views.signup, name='Signup' ),
-    path('users/me/profile', user_views.update_profile, name='Update_profile'),
+
+    path('', include(('posts.urls', 'posts'), namespace='posts')),
+
+    path('users/', include(('users.urls', 'users'), namespace = 'users')),
+
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
