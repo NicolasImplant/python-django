@@ -1,9 +1,36 @@
+from django.forms.fields import SlugField
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from users.forms import ProfileForm, SignupForm
+from django.views.generic import DetailView
+from django.contrib.auth.models import User
+from posts.models import Post
 
 # Create your views here.
+
+class UserDetailView(LoginRequiredMixin ,DetailView):
+    """User detail view"""
+
+    template_name = 'users/detail.html'
+    slug_field  = 'username'
+    slug_url_kwarg = 'username'
+    queryset = User.objects.all()
+    context_object_name = 'user'
+
+    def get_context_data(self, **kwargs):
+        """Add user's posts to context"""
+
+        context = super().get_context_data(**kwargs)
+        user = self.get_object()
+        context['posts'] = Post.objects.filter(user = user).order_by('-created')
+
+        return context
+        
+
+
 
 @login_required
 def update_profile(request):
@@ -22,7 +49,9 @@ def update_profile(request):
             profile.picture = data['picture']
             profile.save()
 
-            return redirect('Update_profile')
+            url = reverse('users:detail', kwargs = {'username': request.user.username})
+
+            return redirect(url)
             
     
     else:
@@ -48,7 +77,7 @@ def login_view(request):
 
         if user:
             login(request, user)
-            return redirect('Feed')
+            return redirect('posts:Feed')
         else:
             return render(request, 'users/login.html', {'error':'Invalid username or password'})
 
@@ -61,7 +90,7 @@ def signup(request):
         form =SignupForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('Login')
+            return redirect('users:Login')
     else:
         form = SignupForm()
     
@@ -75,7 +104,7 @@ def signup(request):
 def logout_view(request):
     """Logout view"""
     logout(request)
-    return redirect('Login')
+    return redirect('users:Login')
 
 
 
