@@ -6,13 +6,13 @@ urlpatterns = [
     # Management
     path(
         route = 'login',
-        view  = views.login_view,
+        view  = views.LoginView.as_view(),
         name  = 'Login',
         ),
 
     path(
         route = 'logout',
-        view  = views.logout_view,
+        view  = views.LogoutView.as_view(),
         name  = 'Logout',
         ),
 
