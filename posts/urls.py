@@ -12,12 +12,14 @@ urlpatterns = [
 
     path(
         route = 'posts/new',
-        view  = views.create_post,
+        view  = views.CreatePostView.as_view(),
         name  = 'New_Post'
         ),
 
-    
-
-    
+    path(
+        route = 'posts/<int:pk>/',
+        view  = views.PostDetailView.as_view(),
+        name  = 'detail' 
+    )     
     
 ]
